@@ -1,23 +1,47 @@
 package Game;
 
-import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.DisplayMode;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Graphics;
 
-import javax.swing.filechooser.FileSystemView;
 
-public class Test {
+public class Test extends Frame{
 
-	public static void main(String[] args) {
-		
-		FileSystemView fsv = FileSystemView.getFileSystemView();
-		String test = fsv.getHomeDirectory().toString();
-		System.out.println(test);
-		
-		int width = Toolkit.getDefaultToolkit().getScreenSize().width;
-		int height = Toolkit.getDefaultToolkit().getScreenSize().height;
-		
-		System.out.println(width);
-		System.out.println(height);		
-		
-	}
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
+    private static final long TIME = 9000;
+
+    public static void main(String[] args){
+        // 创建一个显示模式及设定参数,分别为：宽、高、比特位数、刷新率(赫兹)
+        DisplayMode displayMode = new DisplayMode(800, 600, 16,
+                DisplayMode.REFRESH_RATE_UNKNOWN);
+
+        Test test = new Test();
+        test.run(displayMode);
+    }
+
+    public void run(DisplayMode displayMode){
+        setBackground(Color.black);
+        setForeground(Color.white);
+        setFont(new Font("Dialog", 0, 24));
+        ScreenManager screen = new ScreenManager();
+        try{
+            screen.setFullScreen(displayMode, this);
+            try{
+                Thread.sleep(TIME);
+            } catch (InterruptedException ex){
+            }
+        } finally{
+            screen.restoreScreen();
+        }
+    }
+
+    public void paint(Graphics g){
+        g.drawString("Hello World!", 50, 50);
+    }
 }
