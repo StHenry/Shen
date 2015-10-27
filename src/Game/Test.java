@@ -42,6 +42,6 @@ public class Test extends Frame{
     }
 
     public void paint(Graphics g){
-        g.drawString("Hello World!", 50, 50);
+        g.drawString("test", 50, 50);
     }
 }
