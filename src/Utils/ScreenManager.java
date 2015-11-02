@@ -1,4 +1,4 @@
-package Game;
+package Utils;
 
 import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
@@ -30,7 +30,7 @@ public class ScreenManager{
 			try{
 				device.setDisplayMode(displayMode);
 			}catch(IllegalArgumentException ex){
-				//¥¶¿Ì
+				System.out.print(ex);
 			}
 		}
 	}
@@ -42,7 +42,7 @@ public class ScreenManager{
 	public void reScreen(){
 		Window window = device.getFullScreenWindow();
 		if(window != null){
-			window.disable();
+			window.dispose();
 		}
 		device.setFullScreenWindow(null);
 	}
